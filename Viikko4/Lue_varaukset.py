@@ -29,15 +29,15 @@ def muunna_varaustiedot(varaus: list) -> list:
     # Ensimmäisen alkion = varaus[0] muunnos
     muutettuvaraus.append(int(varaus[0]))
     # Ja tästä jatkuu
-    muutettuvaraus.append(str(varaus[1]))
-    muutettuvaraus.append(str(varaus[2]))
-    muutettuvaraus.append(str(varaus[3]))
+    muutettuvaraus.append(varaus[1])
+    muutettuvaraus.append(varaus[2])
+    muutettuvaraus.append(varaus[3])
     muutettuvaraus.append(datetime.strptime(varaus[4].strip(),"%Y-%m-%d").date())
     muutettuvaraus.append(datetime.strptime(varaus[5].strip(),"%H:%M").time())
     muutettuvaraus.append(int(varaus[6]))
     muutettuvaraus.append(float(varaus[7]))
-    muutettuvaraus.append(bool(varaus[8]))
-    muutettuvaraus.append(str(varaus[9]))
+    muutettuvaraus.append(varaus[8].lower() == "true")
+    muutettuvaraus.append(varaus[9])
     muutettuvaraus.append(datetime.strptime(varaus[10].strip(),"%Y-%m-%d %H:%M:%S"))
     return muutettuvaraus
 
@@ -53,18 +53,67 @@ def hae_varaukset(varaustiedosto: str) -> list:
             varaukset.append(muunna_varaustiedot(varaustiedot))
     return varaukset
 
-def main():
-    # HUOM! seuraaville riveille ei tarvitse tehdä mitään!
-    # Jos muutat, kommentoi miksi muutit
-    # Kutsutaan funkioita hae_varaukset, joka palauttaa kaikki varaukset oikeilla tietotyypeillä
-    varaukset = hae_varaukset("varaukset.txt")
-    print(" | ".join(varaukset[0]))
-    print("------------------------------------------------------------------------")
+def vahvistetut_varaukset(varaukset: list):
     for varaus in varaukset[1:]:
-        print(" | ".join(str(x) for x in varaus))
-        tietotyypit = [type(x).__name__ for x in varaus]
-        print(" | ".join(tietotyypit))
-        print("------------------------------------------------------------------------")
+        if (varaus[8]):
+            print(f"- {varaus[1]}, {varaus[9]}, {varaus[4].strftime('%d.%m.%Y')} klo {varaus[5].strftime('%H.%M')}")
 
+    print()
+    
+def pitkat_varaukset(varaukset: list):
+    for varaus in varaukset[1:]:
+        if(varaus[6] >= 3):
+            print(f"- {varaus[1]}, {varaus[4].strftime('%d.%m.%Y')} klo {varaus[5].strftime('%H.%M')}, kesto {varaus[6]} h, {varaus[9]}")  
+
+    print()
+
+def varausten_vahvistusstatus(varaukset: list):
+    for varaus in varaukset[1:]:
+        if(varaus[8]):
+            print(f"{varaus[1]} → Vahvistettu")
+        else:
+            print(f"{varaus[1]} → EI vahvistettu")
+
+    print()
+ 
+def varausten_lkm(varaukset: list):
+    vahvistetutVaraukset = 0
+    eiVahvistetutVaraukset = 0
+    for varaus in varaukset[1:]:
+        if(varaus[8]):
+            vahvistetutVaraukset += 1
+        else:
+            eiVahvistetutVaraukset += 1
+
+    print(f"- Vahvistettuja varauksia: {vahvistetutVaraukset} kpl")
+    print(f"- Ei-vahvistettuja varauksia: {eiVahvistetutVaraukset} kpl")
+    print()
+
+def varausten_kokonaistulot(varaukset: list):
+    varaustenTulot = 0
+    for varaus in varaukset[1:]:
+        if(varaus[8]):
+            varaustenTulot += varaus[6]*varaus[7]
+
+    print("Vahvistettujen varausten kokonaistulot:", f"{varaustenTulot:.2f}".replace('.', ','), "€")
+    print()
+
+
+
+def main():
+    varaukset = hae_varaukset("varaukset.txt")
+    print("1) Vahvistetut varaukset")
+    vahvistetut_varaukset(varaukset)
+    print("2) Pitkät varaukset (≥ 3 h)")
+    pitkat_varaukset(varaukset)
+    print("3) Varausten vahvistusstatus")
+    varausten_vahvistusstatus(varaukset)
+    print("4) Yhteenveto vahvistuksista")
+    varausten_lkm(varaukset)
+    print("5) Vahvistettujen varausten kokonaistulot")
+    varausten_kokonaistulot(varaukset)    
+
+   
 if __name__ == "__main__":
+
     main()
