@@ -91,26 +91,26 @@ def main():
     """
     Ohjelman pääfunktio: lukee datan, laskee yhteenvedot ja tulostaa raportin.
     """
-    kulutusTuotantoViikko41 = lue_data("viikko41.csv")
-    kulutusTuotantoViikko42 = lue_data("viikko42.csv")
-    kulutusTuotantoViikko43 = lue_data("viikko43.csv")
+    v41 = lue_data("viikko41.csv")
+    v42 = lue_data("viikko42.csv")
+    v43 = lue_data("viikko43.csv")
     print("\nViikon 41 sähkönkulutus ja -tuotanto (kWh, vaiheittain)", end="\n\n")
     print("Päivä\t\tPvm\t\tKulutus [kWh]\t\tTuotanto [kWh]")
     print("\t\t(pv.kk.vvvv)\tv1\tv2\tv3\tv1\tv2\tv3")
     print("---------------------------------------------------------------------------")
-    print("maanantai\t" + "\t".join(paivantiedot(date(2025, 10, 6), kulutusTuotantoViikko41)))
+    print("maanantai\t" + "\t".join(paivantiedot(date(2025, 10, 6), v41)))
 
     print("\nViikon 42 sähkönkulutus ja -tuotanto (kWh, vaiheittain)", end="\n\n")
     print("Päivä\t\tPvm\t\tKulutus [kWh]\t\tTuotanto [kWh]")
     print("\t\t(pv.kk.vvvv)\tv1\tv2\tv3\tv1\tv2\tv3")
     print("---------------------------------------------------------------------------")
-    print("maanantai\t" + "\t".join(paivantiedot(date(2025, 10, 13), kulutusTuotantoViikko42)))
+    print("maanantai\t" + "\t".join(paivantiedot(date(2025, 10, 13), v42)))
 
     print("\nViikon 43 sähkönkulutus ja -tuotanto (kWh, vaiheittain)", end="\n\n")
     print("Päivä\t\tPvm\t\tKulutus [kWh]\t\tTuotanto [kWh]")
     print("\t\t(pv.kk.vvvv)\tv1\tv2\tv3\tv1\tv2\tv3")
     print("---------------------------------------------------------------------------")
-    print("maanantai\t" + "\t".join(paivantiedot(date(2025, 10, 20), kulutusTuotantoViikko43)))
+    print("maanantai\t" + "\t".join(paivantiedot(date(2025, 10, 20), v43)))
 
 if __name__ == "__main__":
     main()

@@ -86,6 +86,9 @@ def paivantiedot(paiva: date, tietokanta: list) -> list:
         f"{tuotanto[2]:.2f}".replace(".", ","),
     ]
 
+def viikon_paivat(alku: date) -> list:
+    """Palauttaa listan viikon (7 pv) päivämääristä alkaen annetusta päivästä."""
+    return [alku.fromordinal(alku.toordinal() + i) for i in range(7)]
 
 def main():
     """
@@ -96,7 +99,18 @@ def main():
     print("Päivä\t\tPvm\t\tKulutus [kWh]\t\tTuotanto [kWh]")
     print("\t\t(pv.kk.vvvv)\tv1\tv2\tv3\tv1\tv2\tv3")
     print("---------------------------------------------------------------------------")
-    print("maanantai\t" + "\t".join(paivantiedot(date(2025, 10, 13), kulutusTuotantoDB)))
+    
+
+    
+    viikonpaivat_fi = [
+        "maanantai", "tiistai   ", "keskiviikko",
+        "torstai    ", "perjantai", "lauantai", "sunnuntai"
+    ]
+
+    paivat = viikon_paivat(date(2025, 10, 13))  # Viikko 42 alkaa tästä
+
+    for i, paiva in enumerate(paivat):
+        print(f"{viikonpaivat_fi[i]}\t" + "\t".join(paivantiedot(paiva, kulutusTuotantoDB)))
 
 if __name__ == "__main__":
     main()
