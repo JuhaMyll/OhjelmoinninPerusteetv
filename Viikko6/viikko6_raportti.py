@@ -110,7 +110,7 @@ def raportti_kk(kuukausi: int, tietokanta: list) -> str:
     """
     kuukaudet = ["Tammikuu", "Helmikuu", "Maaliskuu", "Huhtikuu", "Toukokuu", "Kesäkuu", "Heinäkuu", "Elokuu", "Syyskuu", "Lokakuu", "Marraskuu", "Joulukuu"]
     raportti = "-----------------------------------------------------\n"
-    raportti += f"Raportti kuulta: {kuukaudet[kuukausi-1]} \n"
+    raportti += f"Raportti kuukaudelta: {kuukaudet[kuukausi-1]} \n"
     kulutus = 0
     tuotanto = 0
     lampotila = 0
@@ -187,7 +187,7 @@ def valikot(paavalikko: bool, alavalikko: bool) -> list:
         print("-----------------------------------------------------")
         print("Valitse raporttityyppi:")
         print("1) Päiväkohtainen yhteenveto aikaväliltä")
-        print("2) Kuukausikohtainen yhteenveto yhdelle kuukaudelle")
+        print("2) Kuukausikohtainen yhteenveto yhdeltä kuukaudelta")
         print("3) Vuoden 2025 kokonaisyhteenveto")
         print("4) Lopeta ohjelma")
         print("-----------------------------------------------------")
@@ -196,7 +196,7 @@ def valikot(paavalikko: bool, alavalikko: bool) -> list:
             if not (1 <= valinta <= 4):
                 raise ValueError
         except:
-            print("Valinta ei ole hyväksytty. Anna numero välillä 1-4.")
+            print("Valintaa ei hyväksytty. Anna numero välillä 1-4.")
             continue
 
         if valinta == 1:
@@ -212,7 +212,7 @@ def valikot(paavalikko: bool, alavalikko: bool) -> list:
                 break
             except:
                 print(
-                    "Valinta ei ole hyväksytty. Anna päivät muodossa pv.kk.vvvv. Palataan alkuun."
+                    "Valintaa ei hyväksytty. Anna päivät muodossa pv.kk.vvvv."
                 )
                 continue
 
@@ -223,7 +223,7 @@ def valikot(paavalikko: bool, alavalikko: bool) -> list:
                 break
             except:
                 print(
-                    "Valinta ei ole hyväksytty. Anna numero välillä 1-12. Palataan alkuun."
+                    "Valintaa ei hyväksytty. Anna numero välillä 1-12."
                 )
                 continue
 
@@ -248,7 +248,7 @@ def valikot(paavalikko: bool, alavalikko: bool) -> list:
             if not (1 <= valinta <= 3):
                 raise ValueError
         except:
-            print("Valinta ei ole hyväksytty. Anna numero välillä 1-3.")
+            print("Valintaa ei hyväksytty. Anna numero välillä 1-3.")
             continue
 
         valinnat = [1, valinta]
@@ -258,9 +258,7 @@ def valikot(paavalikko: bool, alavalikko: bool) -> list:
 
 
 def main():
-    """
-    Ohjelman pääfunktio: kysyys käyttäjältä inputteja ja tulostaa/vie tiedostoon raportteja
-    """
+   
     # Luetaan data tiedostosta
     kulutusTuotanto2025 = lue_data("2025.csv")
 
