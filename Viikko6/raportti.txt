@@ -1,6 +1,6 @@
 -----------------------------------------------------
-Raportti väliltä 24.2.2025-30.8.2025
-- Kokonaiskulutus: 2437,02 kWh
-- Kokonaistuotanto: 2562,21 kWh
-- Keskilämpötila: 10,97 °C
+Raportti kuukaudelta: Helmikuu 
+- Kokonaiskulutus: 1364,95 kWh
+- Kokonaistuotanto: 7,11 kWh
+- Keskilämpötila: -0,13 °C
 -----------------------------------------------------
